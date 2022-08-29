@@ -1,8 +1,8 @@
 # **SistemaBebidas**
 ![](https://www.noegasystems.com/wp-content/uploads/sistema-de-gestion-de-almacenes.jpg)
 ### Estructura del Sistema
-> Sección Jefe de Almacen
-Usuario que tendrá acceso a todos los módulos implementados en la plataforma
+### Sección Jefe de Almacen
+> Usuario que tendrá acceso a todos los módulos implementados en la plataforma
 
 ### Sección de Expedición 
 > Este módulo se encarga de modificar el stock (agregar , 
@@ -19,8 +19,8 @@ los usuarios inscritos dentro del sistema plataforma.
 
 ### Herramientas
 > - SQL Server 2019
-- Visual Studio 2022
-- Instalar .Net Framework y los complementos para trabajar con Windows Forms
+> - Visual Studio 2022
+ Instalar .Net Framework y los complementos para trabajar con Windows Forms
 
 
 ### Ejecución del programa

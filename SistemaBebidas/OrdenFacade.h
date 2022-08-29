@@ -172,9 +172,11 @@ public:
     }
 };
 
-
+// Facade Pattern: Engloba 6 clases definidas como atributos que nos permite realizar
+// diferentes tipos de ordenamiento por categoria y el modo (Asc. y Desc.)
 class OrdenFacade {
 private:
+    //Clases englobadas: cada uno ordena segun una categoria 
     OrdenId ordenid;
     OrdenMarca ordenmarca;
     OrdenNombre ordennombre;
@@ -184,37 +186,35 @@ private:
     OrdenStock ordenstock;
 
 public:
-    std::vector<Producto> ordenar(std::string filtro, std::string orden, std::shared_ptr<ArrayDinamicoRef<Producto>> listaProductos) {
+    std::vector<Producto> ordenar(std::string filtro, 
+        std::string orden, std::shared_ptr<ArrayDinamicoRef<Producto>> listaProductos) {
+
         std::vector<Producto>Aux;
         if (filtro == "id") {
             if (orden == "descendente") {
                 Aux = ordenid.ordenar(listaProductos, descendente);
-            }
-            else {
+            } else {
                 Aux = ordenid.ordenar(listaProductos, ascendente);
             }
         }
         else if (filtro == "marca") {
             if (orden == "descendente") {
                 Aux = ordenmarca.ordenar(listaProductos, descendente);
-            }
-            else {
+            } else {
                 Aux = ordenmarca.ordenar(listaProductos, ascendente);
             }
         }
         else if (filtro == "nombre") {
             if (orden == "descendente") {
                 Aux = ordennombre.ordenar(listaProductos, descendente);
-            }
-            else {
+            } else {
                 Aux = ordennombre.ordenar(listaProductos, ascendente);
             }
         }
         else if (filtro == "capacidad") {
             if (orden == "descendente") {
                 Aux = ordencapacidad.ordenar(listaProductos, descendente);
-            }
-            else {
+            } else {
                 Aux = ordencapacidad.ordenar(listaProductos, ascendente);
             }
         }
@@ -229,20 +229,17 @@ public:
         else if (filtro == "precio") {
             if (orden == "descendente") {
                 Aux = ordenprecio.ordenar(listaProductos, descendente);
-            }
-            else {
+            } else {
                 Aux = ordenprecio.ordenar(listaProductos, ascendente);
             }
         }
         else if (filtro == "stock") {
             if (orden == "descendente") {
                 Aux = ordenstock.ordenar(listaProductos, descendente);
-            }
-            else {
+            } else {
                 Aux = ordenstock.ordenar(listaProductos, ascendente);
             }
         }
-
         return Aux;
     }
 };

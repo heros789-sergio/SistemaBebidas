@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-
-class UsuarioSesion{ //Singleton Pattern
+//Singleton Pattern
+class UsuarioSesion{ //Funciona como variable de sesion del programa
 private:
     int id;
     std::string nombres;
@@ -13,13 +13,13 @@ private:
 protected:
     UsuarioSesion() = default;
 public:
-    static UsuarioSesion& get_instance() {
+    static UsuarioSesion& get_instance() { // Metodo Estatico de Instanciacion
         static UsuarioSesion instance;
         return instance;
     }
-    //UsuarioSesion();
-    //UsuarioSesion(int, std::string, std::string, std::string, std::string, std::string, std::string);
-    void setDatosUsuarioSingleton(int id, std::string nombres, std::string apellidos, std::string email, std::string usuario, std::string password, std::string permiso) {
+    // Guarda los datos en los atributos
+    void setDatosUsuarioSingleton(int id, std::string nombres, std::string apellidos,
+            std::string email, std::string usuario, std::string password, std::string permiso) {
         this->id = id;
         this->nombres = nombres;
         this->apellidos = apellidos;
@@ -28,6 +28,7 @@ public:
         this->password = password;
         this->permiso = permiso;
     }
+    // Getters (Solo lectura)
     int getId() const;
     std::string getNombres() const;
     std::string getApellidos() const;

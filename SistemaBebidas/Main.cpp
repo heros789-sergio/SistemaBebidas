@@ -20,6 +20,8 @@ using namespace std;
 using namespace System::Data::SqlClient;
 using namespace msclr::interop;
 
+// Segun la clase, Se modifica el comportamiento de la funcion iniciar_sesion(),
+// Abriendo un formulario diferente, dependiendo el usuarioVisitor
 class JefeAlmacenVisitor:public UsuarioVisitor{
 public:
 	void accept(Visitor *);
@@ -45,7 +47,6 @@ public:
 		SistemaBebidas::OperarioPedidosForm operarioPedidosSeccion(datos);
 		Application::Run(% operarioPedidosSeccion);
 	}
-
 };
 
 class PuestoVigilanciaVisitor:public UsuarioVisitor{
@@ -57,11 +58,13 @@ public:
 	}
 };
 
-class Visitor{
+//Recibe el visitor (Clase que quiere modificar el comportamiento de iniciar_sesion())
+class Visitor{ 
 public:
 	/*
 	- virtual puro(=0) no se puede instanciar
-	- Cada método visit, recibe punteros de diferentes clases
+	- Se usa sobrecarga de Funciones para visit() pues
+	  Cada método visit, recibe punteros de diferentes clases
 	*/
 	virtual void visit(JefeAlmacenVisitor*) = 0;
 	virtual void visit(ControladorExpedicionVisitor *) = 0;
@@ -69,7 +72,7 @@ public:
 	virtual void visit(PuestoVigilanciaVisitor *) = 0;
 };
 
-
+//Se redefine el metodo visit que antes estaba declarado como abstracto
 class iniciar_sesion: public Visitor{ //Sobrecarga de Funciones
 private:
 	UsuarioVisitor* user;
@@ -94,7 +97,6 @@ public:
 	}
 };
 
-
 //Aplicamos los métodos visit de la clase visitor
 void JefeAlmacenVisitor::accept(Visitor *v){
 	v->visit(this);
@@ -108,54 +110,6 @@ void OperarioPedidosVisitor::accept(Visitor *v){
 void PuestoVigilanciaVisitor::accept(Visitor *v){
 	v->visit(this);
 }
-/*
-std::shared_ptr<ArrayDinamicoRef<Producto>> ObtenerProductos() {
-	std::shared_ptr<ArrayDinamicoRef<Producto>> listaProductos = std::make_shared<ArrayDinamicoRef<Producto>>(); //Array de productos	
-	String^ connString = "Data Source=localhost\\sqlexpress;Initial Catalog=sistemabebidas;Integrated Security=True";
-	SqlConnection sqlConn(connString); //se crea el objeto conexion
-	sqlConn.Open();
-	String^ sqlQuery = "SELECT * FROM productos";
-	SqlCommand command(sqlQuery, % sqlConn);
-	SqlDataReader^ fila = command.ExecuteReader();
-
-
-	int id = 0;
-	String^ marca = "";
-	String^ nombre = "";
-	String^ tipo = "";
-	Double capacidad = 0;
-	Double precio = 0;
-	int stock = 0;
-
-	int n = 0;
-
-	int temp1 = 0, temp7 = 0;
-	std::string temp2 = "", temp3 = "", temp4 = "";
-	double temp5 = 0, temp6 = 0;
-	Producto temp;
-
-	while (fila->Read()) {
-		id = fila->GetInt32(0);
-		marca = fila->GetString(1);
-		nombre = fila->GetString(2);
-		tipo = fila->GetString(3);
-		capacidad = fila->GetDouble(4);
-		precio = fila->GetDouble(5);
-		stock = fila->GetInt32(6);
-
-		temp1 = id;
-		temp2 = marshal_as<std::string>(marca);
-		temp3 = marshal_as<std::string>(marca);
-		temp4 = marshal_as<std::string>(marca);
-		temp5 = capacidad;
-		temp6 = precio;
-		temp7 = stock;
-		temp.setValues(temp1, temp2, temp3, temp4, temp5, temp6, temp7);
-		listaProductos->insertarElemento(new Nodo<Producto>(temp));
-	}
-	return listaProductos;
-}
-*/
 
 
 int main(){

@@ -398,23 +398,8 @@ namespace SistemaBebidas {
 		controladorExpedicionSeccion.ShowDialog();
 	}
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-		/*SistemaBebidas::PersonalDeVigilanciaForm personalVigilancia(this->userJefe);
-		personalVigilancia.ShowDialog();*/
-		//while (true) {
 			SistemaBebidas::PersonalDeVigilanciaForm PersonalVigilanciaSeccion(this->datosSesion);
 			PersonalVigilanciaSeccion.ShowDialog();
-			/*
-			if (PersonalVigilanciaSeccion.switchPuestoVigilancia) {
-				SistemaBebidas::PuestoVigilanciaMostrar mostrar_usuarios;
-				mostrar_usuarios.ShowDialog();
-			}
-			if (PersonalVigilanciaSeccion.switchPuestoVigilancia2) {
-				SistemaBebidas::RegistroDeIngreso mostrar_registro;
-				mostrar_registro.ShowDialog();
-				//break;
-			}
-			*/
-		//}
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 		SistemaBebidas::PuestoVigilanciaMostrar mostrar_usuarios;
