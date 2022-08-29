@@ -1,16 +1,6 @@
+// Definicion de Funciones para UsuarioSesion => Singleton Pattern
 #include "UsuarioSesion.h"
 
-//UsuarioSesion::UsuarioSesion(){}
-/*
-UsuarioSesion::UsuarioSesion(int id, std::string nombres, std::string apellidos, std::string email, std::string usuario, std::string password, std::string permiso) {
-    this->id = id;
-    this->nombres = nombres;
-    this->apellidos = apellidos;
-    this->email = email;
-    this->usuario = usuario;
-    this->password = password;
-    this->permiso = permiso;
-}*/
 int UsuarioSesion::getId() const {
     return this->id;
 }

@@ -292,47 +292,6 @@ namespace SistemaBebidas {
 	private: System::Void btnRegresar_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
-		   /*
-	private: System::Void btnBuscar_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ nombre = this->Buscador->Text;
-		String^ filtro = this->filtro->Text;
-
-		String^ connString = "Data Source=localhost\\sqlexpress;Initial Catalog=sistemabebidas;Integrated Security=True";
-		SqlConnection sqlConn(connString); //se crea el objeto conexion
-		sqlConn.Open();
-		String^ sqlQuery = "SELECT * FROM vigilancia WHERE " + filtro + "=@nombre";
-		SqlCommand command(sqlQuery, % sqlConn);
-
-		command.Parameters->AddWithValue("@nombre", nombre);
-		//command.Parameters->AddWithValue("@filtro", filtro);
-		SqlDataReader^ fila = command.ExecuteReader();
-		data_busqueda->Rows->Clear();
-
-
-
-		while (fila->Read()) {
-			int id = fila->GetInt32(0);
-			String^ nombres = fila->GetString(1);
-			String^ apellidos = fila->GetString(2);
-			String^ permiso = fila->GetString(3);
-			String^ hora = fila->GetString(4);
-			String^ fecha = fila->GetString(5);
-
-			int n = data_busqueda->Rows->Add();
-			data_busqueda->Rows[n]->Cells[0]->Value = id;
-			data_busqueda->Rows[n]->Cells[1]->Value = nombres;
-			data_busqueda->Rows[n]->Cells[2]->Value = apellidos;
-			data_busqueda->Rows[n]->Cells[3]->Value = permiso;
-			data_busqueda->Rows[n]->Cells[4]->Value = hora;
-			data_busqueda->Rows[n]->Cells[5]->Value = fecha;
-		}
-
-		sqlConn.Close();
-
-		Buscador->Text = "";
-	}
-	
-	*/
 
 	private: System::Void btnBuscar_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ filtro = this->filtro->Text;
@@ -348,32 +307,30 @@ namespace SistemaBebidas {
 		String^ permiso = "";
 		String^ hora = "";
 		String^ fecha = "";
-		//String^ registro = "";
 
 		int n = 0;
 		int conta = 0;
 
 		int auxiliar = 0;
-		//if (filtro == "NOMBRE") {
-			for (int i = 0; i < registrosEncontrados->getSize(); i++) {
-				int id = registrosEncontrados.get()->getInPosicion(i)->getDato().id;
-				String^ nombre = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().nombre).data());
-				String^ apellidos = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().permiso).data());
-				String^ permiso = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().apellidos).data());
-				String^ hora = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().hora).data());
-				String^ fecha = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().fecha).data());
-				//registro = gcnew String((ListaUsuario.get()->getInPosicion(i)->getDato().registro).data());
-				data_busqueda->Rows->Add();
+	
+		for (int i = 0; i < registrosEncontrados->getSize(); i++) {
+			int id = registrosEncontrados.get()->getInPosicion(i)->getDato().id;
+			String^ nombre = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().nombre).data());
+			String^ apellidos = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().permiso).data());
+			String^ permiso = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().apellidos).data());
+			String^ hora = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().hora).data());
+			String^ fecha = gcnew String((registrosEncontrados.get()->getInPosicion(i)->getDato().fecha).data());
+			//registro = gcnew String((ListaUsuario.get()->getInPosicion(i)->getDato().registro).data());
+			data_busqueda->Rows->Add();
 
-				data_busqueda->Rows[auxiliar]->Cells[0]->Value = id;
-				data_busqueda->Rows[auxiliar]->Cells[1]->Value = nombre;
-				data_busqueda->Rows[auxiliar]->Cells[2]->Value = apellidos;
-				data_busqueda->Rows[auxiliar]->Cells[3]->Value = permiso;
-				data_busqueda->Rows[auxiliar]->Cells[4]->Value = hora;
-				data_busqueda->Rows[auxiliar]->Cells[5]->Value = fecha;
-				auxiliar++;
-			}
-		//}
+			data_busqueda->Rows[auxiliar]->Cells[0]->Value = id;
+			data_busqueda->Rows[auxiliar]->Cells[1]->Value = nombre;
+			data_busqueda->Rows[auxiliar]->Cells[2]->Value = apellidos;
+			data_busqueda->Rows[auxiliar]->Cells[3]->Value = permiso;
+			data_busqueda->Rows[auxiliar]->Cells[4]->Value = hora;
+			data_busqueda->Rows[auxiliar]->Cells[5]->Value = fecha;
+			auxiliar++;
+		}
 	}
 	private: System::Void filtro_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	}

@@ -1,6 +1,7 @@
 #pragma once
+// Clase Nodo generico para poder usar diferentes tipos de datos, clases y estructuras
 #include <memory>
-// using namespace std;
+// using namespace std
 
 template<class type>
 class Nodo {

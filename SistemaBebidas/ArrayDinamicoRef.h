@@ -1,5 +1,9 @@
 #pragma once
 #include "Nodo.h"
+/*Clase ArrayDinamicoRef nos permite utilizar un array generico de referencias que almacena
+las direcciones de memoria de sus Nodos
+Es utilizado para almacenar los resultados de las consultas sql de los functores
+*/
 template<typename type>
 class ArrayDinamicoRef {
 private:

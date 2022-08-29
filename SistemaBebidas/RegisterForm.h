@@ -1,9 +1,5 @@
 #pragma once
 #include "UsuarioSesion.h"
-//#include "UsuarioVisitor.h"
-//#include "ControladorExpedicion.h"
-//#include "OperarioPedidos.h"
-//#include "PersonalDeVigilancia.h"
 #include "Encriptar.h"
 #include <msclr\marshal_cppstd.h>
 
@@ -328,6 +324,7 @@ namespace SistemaBebidas {
 		String^ password = txtBxPassword->Text;
 		String^ confirmPassword = txtBoxConfirmPassw->Text;
 		String^ permiso = this->cmbBxTxtPermiso;
+		/*Validacion para campos vacios*/
 		if (nombres->Length == 0 || apellidos->Length == 0 || email->Length == 0 || usuario->Length == 0 || password->Length == 0 || confirmPassword->Length == 0) {
 			MessageBox::Show("Por favor ingrese todos los campos ", "Campos Vacios", MessageBoxButtons::OK);
 			return;
@@ -369,18 +366,7 @@ namespace SistemaBebidas {
 			std::string param6 = marshal_as<std::string>(password);
 			std::string param7 = marshal_as<std::string>(permiso);
 
-			//user = new UsuarioSesion(param1, param2, param3, param4, param5, param6, param7);
 			user.setDatosUsuarioSingleton(param1, param2, param3, param4, param5, param6, param7);
-			/*
-			if (permiso == "Controlador de Expedicion") {
-				user = new ControladorExpedicion(param1, param2, param3, param4, param5, param6, param7);
-			}
-			else if (permiso == "Operario de Pedidos") {
-				user = new OperarioPedidos(param1, param2, param3, param4, param5, param6, param7);
-			}
-			else if (permiso == "Personal de Vigilancia") {
-				user = new PersonalDeVigilancia(param1, param2, param3, param4, param5, param6, param7);
-			}*/
 
 			this->Close();
 

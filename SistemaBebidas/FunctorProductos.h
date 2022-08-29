@@ -20,7 +20,7 @@ public:
 		String^ sqlQuery = "SELECT * FROM productos";
 		SqlCommand command(sqlQuery, % sqlConn);
 		SqlDataReader^ fila = command.ExecuteReader();
-
+		// Variables de servicio
 		int id = 0;
 		String^ marca = "";
 		String^ nombre = "";
@@ -44,14 +44,14 @@ public:
 			stock = fila->GetInt32(6);
 
 			temp1 = id;
-			temp2 = marshal_as<std::string>(marca);
+			temp2 = marshal_as<std::string>(marca); //conversion de Sytem:String a std::string
 			temp3 = marshal_as<std::string>(nombre);
 			temp4 = marshal_as<std::string>(tipo);
 			temp5 = capacidad;
 			temp6 = precio;
 			temp7 = stock;
 			temp.setValues(temp1, temp2, temp3, temp4, temp5, temp6, temp7);
-			listaProductos->insertarElemento(new Nodo<Producto>(temp));
+			listaProductos->insertarElemento(new Nodo<Producto>(temp)); //Se inserta producto en listaProductos
 		}
 		return listaProductos;
     }

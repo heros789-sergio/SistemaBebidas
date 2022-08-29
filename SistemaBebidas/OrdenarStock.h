@@ -229,7 +229,7 @@ namespace SistemaBebidas {
 		String^ filtro = this->filtro->Text;
 		String^ Orden = this->Orden->Text;
 
-		FunctorProductos fun;
+		FunctorProductos fun; // Functor que obtiene los productos de la base de datos
 		std::shared_ptr<ArrayDinamicoRef<Producto>> lista = fun();
 
 		OrdenFacade orden;

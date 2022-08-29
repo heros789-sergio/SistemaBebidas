@@ -39,7 +39,6 @@ public:
 			permiso = fila->GetString(3);
 			hora = fila->GetString(4);
 			fecha = fila->GetString(5);
-			//registro = fila->GetString(5);
 
 			temp1 = id;
 			temp2 = marshal_as<std::string>(nombre);
@@ -47,8 +46,6 @@ public:
 			temp4 = marshal_as<std::string>(permiso);
 			temp5 = marshal_as<std::string>(hora);
 			temp6 = marshal_as<std::string>(fecha);
-			//temp7 = marshal_as<std::string>(registro);
-
 
 			temp.setValues(temp1, temp2, temp3, temp4, temp5, temp6);
 			listaVigilancia->insertarElemento(new Nodo<UsuarioVi>(temp));

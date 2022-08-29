@@ -123,16 +123,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AgregarStock.cpp" />
-    <ClCompile Include="BusquedaFiltro.cpp" />
-    <ClCompile Include="ControladorExpedicionForm.cpp" />
-    <ClCompile Include="Estadisticas.cpp" />
-    <ClCompile Include="LoginForm.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ModificarStock.cpp" />
-    <ClCompile Include="OrdenarStock.cpp" />
-    <ClCompile Include="RegisterForm.cpp" />
-    <ClCompile Include="RegistroDeIngreso.cpp" />
     <ClCompile Include="UsuarioSesion.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,11 +164,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="OrdenFacade.h" />
-    <ClInclude Include="PersonalDeVigilancia.h" />
     <ClInclude Include="PersonalDeVigilanciaForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="PersonalVigilancia.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Producto.h" />

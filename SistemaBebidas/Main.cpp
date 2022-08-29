@@ -1,8 +1,11 @@
 #include <iostream>
 #include <string>
+// Clases
 #include "UsuarioSesion.h"
 #include "UsuarioVisitor.h"
+// Functores
 #include "FunctorProductos.h"
+// Interfaces (Formularios)
 #include "LoginForm.h"
 #include "RegisterForm.h"
 #include "ValidarJefeForm.h"
@@ -17,8 +20,8 @@
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace std;
-using namespace System::Data::SqlClient;
-using namespace msclr::interop;
+using namespace System::Data::SqlClient; // Espacio de nombres para manejo de consultas Sql
+using namespace msclr::interop; // Espacio de nombres para manejar conversiones entre System::String^ y std::string
 
 // Segun la clase, Se modifica el comportamiento de la funcion iniciar_sesion(),
 // Abriendo un formulario diferente, dependiendo el usuarioVisitor
@@ -124,7 +127,7 @@ int main(){
 	while (true) {
 		SistemaBebidas::LoginForm^ login = gcnew SistemaBebidas::LoginForm();
 		login->ShowDialog();
-		if (login->switchToRegister) {
+		if (login->switchToRegister) { // Para el caso de que el usuario quiere ir a RegistroForm
 			SistemaBebidas::ValidarJefeForm^ validarJefeForm = gcnew SistemaBebidas::ValidarJefeForm;
 			validarJefeForm->ShowDialog();
 			if (validarJefeForm->validacionJefe) {
@@ -140,13 +143,14 @@ int main(){
 				}
 			}
 		}
-		else {
+		else { // Para cuando el usuario se logea, se obtiene los datos de user (Singleton)
 			user = login->user;
 			break;
 		}
 	}
-	iniciar_sesion ad_visitor(&user); // Por referencia por el Singleton Pattern
+	iniciar_sesion ad_visitor(&user); // Por referencia por el patron Singleton
 
+	// Dependiendo el permiso se le asigna un Vistor Especifico que lo redirija a su formulario correspondiente
 	if(user.getPermiso() == "Jefe de Almacen"){
 		set[0]->accept(&ad_visitor);		
 	}
@@ -160,11 +164,4 @@ int main(){
 		set[3]->accept(&ad_visitor);	
 	}
 
-	//}
-	//else {
-		//listaProductos.get()->getInPosicion(0)->getDato().precio
-		//String^ marca = gcnew String((listaProductos.get()->getInPosicion(0)->getDato().marca).data());
-		//MessageBox::Show("Usted salio del sistema", "Sistema de Almacen de Bebidas", MessageBoxButtons::OK);
-	//}
-	//delete user;
 }

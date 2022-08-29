@@ -174,15 +174,6 @@ namespace SistemaBebidas {
 	private: System::Void ProductosForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		FunctorProductos obtenerProductos;
 		std::shared_ptr<ArrayDinamicoRef<Producto>> listaProductos = obtenerProductos();
-		
-		/*String^ connString = "Data Source=localhost\\sqlexpress;Initial Catalog=sistemabebidas;Integrated Security=True";
-		SqlConnection sqlConn(connString); //se crea el objeto conexion
-		sqlConn.Open();
-		String^ sqlQuery = "SELECT * FROM productos";
-		SqlCommand command(sqlQuery, % sqlConn);
-		//command.Parameters->AddWithValue("@nombre", nombre);
-		SqlDataReader^ fila = command.ExecuteReader();
-		*/
 
 		tablaProductos->Rows->Clear();
 		int id = 0;
@@ -194,8 +185,6 @@ namespace SistemaBebidas {
 		int stock = 0;
 
 		int n = 0;
-
-		//listaProductos.get()->getInPosicion(0)->getDato().precio;
 
 		for (int i = 0; i < listaProductos->getSize(); i++) {
 			int id = listaProductos.get()->getInPosicion(i)->getDato().id;
@@ -219,29 +208,6 @@ namespace SistemaBebidas {
 			n++;
 		}
 
-		/*
-		while (fila->Read()) {
-			int id = fila->GetInt32(0);
-			String^ marca = fila->GetString(1);
-			String^ nombre = fila->GetString(2);
-			String^ tipo = fila->GetString(3);
-			Double capacidad = fila->GetDouble(4);
-			Double precio = fila->GetDouble(5);
-			int stock = fila->GetInt32(6);
-
-			int n = tablaProductos->Rows->Add();
-
-			tablaProductos->Rows[n]->Cells[0]->Value = id;
-			tablaProductos->Rows[n]->Cells[1]->Value = marca;
-			tablaProductos->Rows[n]->Cells[2]->Value = nombre;
-			tablaProductos->Rows[n]->Cells[3]->Value = tipo;
-			tablaProductos->Rows[n]->Cells[4]->Value = capacidad;
-			tablaProductos->Rows[n]->Cells[5]->Value = precio;
-			tablaProductos->Rows[n]->Cells[6]->Value = stock;
-		}
-		*/
-
-		//sqlConn.Close();
 	}
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Close();

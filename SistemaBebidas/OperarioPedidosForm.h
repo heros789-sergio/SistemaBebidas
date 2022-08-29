@@ -674,13 +674,9 @@ namespace SistemaBebidas {
 
 			Creando->WriteLine(Time);
 			Creando->Close();//cerramos edición
-
 			/*---------------------------------------------------*/
-
 			/*Notificamos si se realizó la creación*/
 			label_conf_crear->Text = "Creación correcta";
-
-
 			//COMANDOS para DATABASE
 			//Conexion con la base de datos
 			String^ connString = "Data Source=localhost\\sqlexpress;Initial Catalog=sistemabebidas;Integrated Security=True";

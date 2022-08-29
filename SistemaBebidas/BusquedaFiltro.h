@@ -223,7 +223,7 @@ private: System::Void Buscar_Click(System::Object^ sender, System::EventArgs^ e)
 	String^ sqlQuery = "SELECT * FROM productos WHERE " + filtro + "=@nombre";
 	SqlCommand command(sqlQuery, % sqlConn);
 	command.Parameters->AddWithValue("@nombre", nombre);
-	//command.Parameters->AddWithValue("@filtro", filtro);
+
 	SqlDataReader^ fila = command.ExecuteReader();
 
 	cuadro->Rows->Clear();

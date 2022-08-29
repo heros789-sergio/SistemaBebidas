@@ -6,6 +6,9 @@
 #include "Nodo.h"
 #include <vector>
 
+/* Funciones genericas que se usaran para la aplicacion de punteros a funciones 
+    para determinar el tipo de orden (Asc. y Desc.)
+*/
 template <typename T>
 bool ascendente(T x, T y) {
     return x < y;

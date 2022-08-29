@@ -30,12 +30,10 @@ public:
 
 		String^ hora2 = gcnew String(tt);
 		String^ fechas = gcnew String(fecha.data());
-		//string query = "INSERT INTO Person (Name,Salary) VALUES('Max','$1200')";
+
 		String^ connString = "Data Source=localhost\\sqlexpress;Initial Catalog=sistemabebidas;Integrated Security=True";
 		SqlConnection sqlConn2(connString); //se crea el objeto conexion
 		sqlConn2.Open();
-		//string registro = "INGRESO";
-		//String^ re ="REGISTRO";
 
 		String^ sqlVigilacia = "INSERT INTO vigilancia " + "(ID,NOMBRE,APELLIDOS,PERMISO,HORA,FECHA) VALUES " + "(@param1,@param2,@param3,@param7,@hora,@fecha);";
 		SqlCommand command2(sqlVigilacia, % sqlConn2);
@@ -47,7 +45,7 @@ public:
 		command2.Parameters->AddWithValue("@fecha", fechas);
 		command2.Parameters->AddWithValue("@hora", hora2);
 
-		command2.ExecuteNonQuery();
+		command2.ExecuteNonQuery(); // Ejecuta la query sql pero no retorna nada
 
 		sqlConn2.Close();
 	}

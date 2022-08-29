@@ -307,9 +307,9 @@ namespace SistemaBebidas {
 			this->label11->Location = System::Drawing::Point(30, 25);
 			this->label11->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(401, 35);
+			this->label11->Size = System::Drawing::Size(436, 35);
 			this->label11->TabIndex = 8;
-			this->label11->Text = L"MODULO DE VIGILANCIA";
+			this->label11->Text = L"SECCION ADMINISTRADOR";
 			// 
 			// btncerrarSesion
 			// 

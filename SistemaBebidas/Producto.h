@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+/*Modelo para almacenar informacion de cada producto de la base de datos*/
 struct Producto
 {
     int id;

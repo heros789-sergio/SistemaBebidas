@@ -3,9 +3,9 @@
 #include "Producto.h"
 #include "Nodo.h"
 #include "ArrayDinamicoRef.h"
-#include "Encriptar.h"
-#include "Desencriptar.h"
-#include <chrono>
+#include "Encriptar.h" //Functor Encriptacion ROT13
+#include "Desencriptar.h" //Functor Desencriptacion ROT13
+#include <chrono> 
 #include <iomanip>
 #include <string>
 #include <Windows.h>
@@ -267,49 +267,16 @@ namespace SistemaBebidas {
 		MessageBox::Show("Usted salio del sistema", "Sistema de Almacen de Bebidas", MessageBoxButtons::OK);
 		this->Close();
 	}
-	//public: UsuarioSesion* user = nullptr;
-	public: UsuarioSesion& user = UsuarioSesion::get_instance();
-	/*
-	protected: bool acceso(String^ usuarioInput,String^ passwordInput) {
-		std::string stdPasswordInput = marshal_as<std::string>(passwordInput);
-		String^ connString = "Data Source=localhost\\sqlexpress;Initial Catalog=sistemabebidas;Integrated Security=True";
-		SqlConnection sqlConn(connString); //se crea el objeto conexion
-		sqlConn.Open();
-		String^ sqlQuery = "SELECT usuario,password FROM usuarios";
-		SqlCommand command(sqlQuery, % sqlConn);
-		SqlDataReader^ fila = command.ExecuteReader();
-
-		String^ temp1 = "";
-		String^ temp2 = "";
-		std::string claveEncriptada = "";
-		std::string claveDesencriptada = "";
-		Desencriptar desencriptador;
-
-		while (fila->Read()) {
-			temp1 = fila->GetString(0);
-			temp2 = fila->GetString(1);
-			claveEncriptada = marshal_as<std::string>(temp2);
-			claveDesencriptada = desencriptador(claveEncriptada);
-			if ((stdPasswordInput == claveDesencriptada)) {
-				sqlConn.Close();
-				return true;
-			}
-		}
-		sqlConn.Close();
-		return false;
-	}
-	*/
+	public: UsuarioSesion& user = UsuarioSesion::get_instance(); // Instanciacion de UsuarioSesion usando Singleton Pattern
+	
 	private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ usuario = this->txtbxUsuario->Text;
 		String^ password = this->txtbxPassword->Text;
 		
 		RealAccesoSubject* real_subject = new RealAccesoSubject(usuario,password);
 		AccesoProxy* accesoProxy = new AccesoProxy(real_subject,usuario,password);
-		//real_subject->SolicitudAcceso();
 
-		//if (acceso(usuario,password) == false) {
-		//if (real_subject->SolicitudAcceso() == false) {
-		if (accesoProxy->SolicitudAcceso() == false) {
+		if (accesoProxy->SolicitudAcceso() == false) { //Uso del proxy para validaciones
 			MessageBox::Show("Usuario o password incorrectos",
 				"Error al ingresar al sistema", MessageBoxButtons::OK);
 			return;
@@ -320,9 +287,10 @@ namespace SistemaBebidas {
 			//String^ connString = "Data Source=LAPTOP-0MVU5789\SQLEXPRESS;Initial Catalog=sistemabebidas;User ID=sa;Password=administrador";
 			SqlConnection sqlConn(connString); //se crea el objeto conexion
 			sqlConn.Open();
-			//String^ sqlQuery = "SELECT * FROM usuarios WHERE usuario=@usuario AND password=@password;";
 			String^ sqlQuery = "SELECT * FROM usuarios WHERE usuario='"+usuario+"'";
 			SqlCommand command(sqlQuery, % sqlConn);
+			//Forma Alternativa de Ejecutar la consulta
+			//String^ sqlQuery = "SELECT * FROM usuarios WHERE usuario=@usuario AND password=@password;";
 			//command.Parameters->AddWithValue("@usuario", usuario);
 			//command.Parameters->AddWithValue("@password", password);
 
@@ -336,14 +304,12 @@ namespace SistemaBebidas {
 				std::string param6 = marshal_as<std::string>((reader->GetString(5)));
 				std::string param7 = marshal_as<std::string>((reader->GetString(6)));
 
+				/*Manejo de la hora del sistema para registrar acceso de usuario a la base de datos*/
 				std::time_t t = std::time(nullptr);
 				std::tm* now = std::localtime(&t);
-
 				std::string fecha = std::to_string(now->tm_mday) + '/' + std::to_string(now->tm_mon + 1) + '/' + std::to_string(now->tm_year + 1900);
-
 				char tt[100];
 				strftime(tt, 100, "%H:%M:%S", now);
-
 				String^ hora2 = gcnew String(tt);
 
 				int^ id = reader->GetInt32(0);
@@ -352,71 +318,26 @@ namespace SistemaBebidas {
 				String^ fechas = gcnew String(fecha.data());
 				String^ permiso = reader->GetString(6);
 
-				//sqlConn.Close();
-				//string query = "INSERT INTO Person (Name,Salary) VALUES('Max','$1200')";
-
-				//TOMA DE REGISTRO
+				// TOMA DE REGISTRO
+				// Registraa acceso de usuario en la base de datos
 				FunctorRegistrarAcceso registro;
 				registro(id, nombre, apellido, permiso);
-				//FunctorVigilancia registro;
-				//registro.tomar_registro(id, nombre, apellido, permiso);
-
-				/*
-				SqlConnection sqlConn2(connString); //se crea el objeto conexion
-				sqlConn2.Open();
-
-				String^ sqlVigilacia = "INSERT INTO vigilancia " + "(ID,NOMBRE,APELLIDOS,PERMISO,HORA,FECHA) VALUES " + "(@param1,@param2,@param3,@param7,@hora ,@fecha);";
-				SqlCommand command2(sqlVigilacia, % sqlConn2);
-
-				command2.Parameters->AddWithValue("@param1", id);
-				command2.Parameters->AddWithValue("@param2", nombre);
-				command2.Parameters->AddWithValue("@param3", apellido);
-				command2.Parameters->AddWithValue("@param7", permiso);
-				command2.Parameters->AddWithValue("@fecha", fechas);
-				command2.Parameters->AddWithValue("@hora", hora2);
-
-				command2.ExecuteNonQuery();
-
-				sqlConn2.Close();
-				*/
-				
-				//user = new UsuarioSesion(param1, param2, param3, param4, param5, param6, param7);
+				// Insertamos los datos de usuario en la "Variable de sesion"
 				user.setDatosUsuarioSingleton(param1, param2, param3, param4, param5, param6, param7);
 				this->Close();
-
-				/*if (reader->GetString(6) == "Jefe de Almacen") {
-					user = new Usuario(param1, param2, param3, param4, param5, param6, param7);
-					this->Close();
-				}
-				else if (reader->GetString(6) == "Controlador de Expedicion") {
-					user = new Usuario(param1, param2, param3, param4, param5, param6, param7);
-					this->Close();
-				}
-				else if (reader->GetString(6) == "Operario de Pedidos") {
-					user = new ControladorExpedicion(param1, param2, param3, param4, param5, param6, param7);
-					this->Close();
-				}
-				else if (reader->GetString(6) == "Personal de Vigilancia") {
-					user = new ControladorExpedicion(param1, param2, param3, param4, param5, param6, param7);
-					this->Close();
-				}
-				else {
-					MessageBox::Show("Usted no tiene permisos para acceder al sistema",
-						"Error de permisos", MessageBoxButtons::OK);
-				}*/
 
 			}
 			else {
 				String^ mensajito = "Usuario o password incorrecto";
 				MessageBox::Show(mensajito,
-					"Email or Password Error", MessageBoxButtons::OK);
+					"Email or Password Error", MessageBoxButtons::OK); // Manejo de excepciones
 			}
 
 
 		}
 		catch (Exception^ e) {
 			MessageBox::Show("Failed to connect to database"+e,
-				"Database Connection Error", MessageBoxButtons::OK);
+				"Database Connection Error", MessageBoxButtons::OK); // Manejo de excepciones
 		}
 	}
 	public: bool switchToRegister = false;

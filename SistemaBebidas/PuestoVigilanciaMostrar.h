@@ -255,10 +255,6 @@ namespace SistemaBebidas {
 		sqlConn.Close();
 	}
 
-
-
-
-
 	private: System::Void btnBuscar_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ nombre = this->Buscador->Text;
 		String^ filtro = this->filtro->Text;
@@ -273,8 +269,6 @@ namespace SistemaBebidas {
 		//command.Parameters->AddWithValue("@filtro", filtro);
 		SqlDataReader^ fila = command.ExecuteReader();
 		data_busqueda->Rows->Clear();
-
-
 
 		while (fila->Read()) {
 			int id = fila->GetInt32(0);

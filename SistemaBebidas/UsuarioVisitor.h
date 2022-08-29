@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-class UsuarioVisitor { //visitor
+class UsuarioVisitor { // Visitor Pattern
 protected:
     int id;
     std::string nombres;
