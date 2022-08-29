@@ -159,10 +159,7 @@ std::shared_ptr<ArrayDinamicoRef<Producto>> ObtenerProductos() {
 
 
 int main(){
-	//ArrayDinamicoRef<Producto>* listaDeProductos = ObtenerProductos();
-	//FunctorProductos obtenerProductos;
-	//std::shared_ptr<ArrayDinamicoRef<Producto>> listaProductos = obtenerProductos();
-
+	UsuarioSesion& user = UsuarioSesion::get_instance();
 	UsuarioVisitor *set[] = {	new JefeAlmacenVisitor, 
 								new ControladorExpedicionVisitor, 
 								new OperarioPedidosVisitor,
@@ -170,7 +167,6 @@ int main(){
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	//Usuario* user = nullptr;
-	UsuarioSesion& user = UsuarioSesion::get_instance();
 	while (true) {
 		SistemaBebidas::LoginForm^ login = gcnew SistemaBebidas::LoginForm();
 		login->ShowDialog();

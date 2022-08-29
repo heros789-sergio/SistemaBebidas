@@ -51,6 +51,7 @@ namespace SistemaBebidas {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn7;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Button^ button5;
 
 	private:
 		/// <summary>
@@ -74,6 +75,7 @@ namespace SistemaBebidas {
 			this->dataGridViewTextBoxColumn6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->dataGridViewTextBoxColumn7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaProductos))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -85,9 +87,9 @@ namespace SistemaBebidas {
 					this->dataGridViewTextBoxColumn2, this->dataGridViewTextBoxColumn3, this->dataGridViewTextBoxColumn4, this->dataGridViewTextBoxColumn5,
 					this->dataGridViewTextBoxColumn6, this->dataGridViewTextBoxColumn7
 			});
-			this->tablaProductos->Location = System::Drawing::Point(22, 125);
+			this->tablaProductos->Location = System::Drawing::Point(107, 103);
 			this->tablaProductos->Name = L"tablaProductos";
-			this->tablaProductos->Size = System::Drawing::Size(740, 322);
+			this->tablaProductos->Size = System::Drawing::Size(746, 322);
 			this->tablaProductos->TabIndex = 58;
 			// 
 			// dataGridViewTextBoxColumn1
@@ -130,18 +132,34 @@ namespace SistemaBebidas {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 27.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(346, 40);
+			this->label1->Location = System::Drawing::Point(211, 39);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(461, 42);
+			this->label1->Size = System::Drawing::Size(520, 42);
 			this->label1->TabIndex = 59;
-			this->label1->Text = L"BUSQUEDA POR FILTRO";
+			this->label1->Text = L"PRODUCTOS DE ALMACEN ";
+			// 
+			// button5
+			// 
+			this->button5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(65)));
+			this->button5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button5->ForeColor = System::Drawing::Color::White;
+			this->button5->Location = System::Drawing::Point(629, 457);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(315, 55);
+			this->button5->TabIndex = 60;
+			this->button5->Text = L"Regresar A Seccion Principal";
+			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &ProductosForm::button5_Click);
 			// 
 			// ProductosForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Coral;
-			this->ClientSize = System::Drawing::Size(1180, 478);
+			this->ClientSize = System::Drawing::Size(966, 524);
+			this->Controls->Add(this->button5);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->tablaProductos);
 			this->Name = L"ProductosForm";
@@ -225,5 +243,9 @@ namespace SistemaBebidas {
 
 		//sqlConn.Close();
 	}
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
+	//controladorExpedicionSeccion.ShowDialog();
+}
 };
 }

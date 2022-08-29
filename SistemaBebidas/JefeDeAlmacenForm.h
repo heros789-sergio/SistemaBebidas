@@ -390,7 +390,7 @@ namespace SistemaBebidas {
 		label5->Text = syspermiso;
 	}
 	private: System::Void pictureBox2_MouseHover(System::Object^ sender, System::EventArgs^ e) {
-
+		
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		//Usuario* usertemp;

@@ -70,9 +70,6 @@ namespace SistemaBebidas {
 	private: System::Windows::Forms::Panel^ panel3;
 
 	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
@@ -305,14 +302,6 @@ namespace SistemaBebidas {
 	private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ usuario = this->txtbxUsuario->Text;
 		String^ password = this->txtbxPassword->Text;
-
-		/*
-		if (usuario->Length == 0 || password->Length == 0) {
-			MessageBox::Show("Por favor ingrese email y password",
-				"Email o Password vacio", MessageBoxButtons::OK);
-			return;
-		}
-		*/
 		
 		RealAccesoSubject* real_subject = new RealAccesoSubject(usuario,password);
 		AccesoProxy* accesoProxy = new AccesoProxy(real_subject,usuario,password);
